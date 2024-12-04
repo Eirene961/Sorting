@@ -90,7 +90,7 @@ void GenerateData(int a[], int n, int dataType)
 
 unsigned long long count_comparison = 0;
 chrono::duration<double> elapsed;
-
+int secsToMilisecs = 1000;
 
 // ---------------------- THE ANH ----------------------
 
@@ -570,13 +570,13 @@ string InputOrder(string input_order) {
 
 void HandleOutputParameter(string output_parameter) {
 	if (output_parameter == "-time") {
-		cout << "Running time: " << elapsed.count() * 1000 << endl;
+		cout << "Running time: " << elapsed.count() * secsToMilisecs << endl;
 	}
 	else if (output_parameter == "-comp") {
 		cout << "Comparisons: " << count_comparison << endl;
 	}
 	else if (output_parameter == "-both") {
-		cout << "Running time: " << elapsed.count() * 1000 << endl;
+		cout << "Running time: " << elapsed.count() * secsToMilisecs << endl;
 		cout << "Comparisons: " << count_comparison << endl;
 	}
 	else {
@@ -740,10 +740,10 @@ int main(int argc, char* argv[])
 			fin.close();
 
 			ExecuteSortAlgorithm(a, n, algorithm_name_1);
-			double running_time_1 = elapsed.count() * 1000;
+			double running_time_1 = elapsed.count() * secsToMilisecs;
 			int comparison_1 = count_comparison;
 			ExecuteSortAlgorithm(b, n, algorithm_name_2);
-			double running_time_2 = elapsed.count() * 1000;
+			double running_time_2 = elapsed.count() * secsToMilisecs;
 			int comparison_2 = count_comparison;
 
 			cout << "Running time: " << running_time_1 << " | " << running_time_2 << endl;
@@ -768,10 +768,10 @@ int main(int argc, char* argv[])
 			WriteFile(a, n, input_file);
 
 			ExecuteSortAlgorithm(a, n, algorithm_name_1);
-			double running_time_1 = elapsed.count() * 1000;
+			double running_time_1 = elapsed.count() * secsToMilisecs;
 			int comparison_1 = count_comparison;
 			ExecuteSortAlgorithm(b, n, algorithm_name_2);
-			double running_time_2 = elapsed.count() * 1000;
+			double running_time_2 = elapsed.count() * secsToMilisecs;
 			int comparison_2 = count_comparison;
 
 			cout << "Running time: " << running_time_1 << " | " << running_time_2 << endl;
