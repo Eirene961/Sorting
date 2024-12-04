@@ -88,7 +88,7 @@ void GenerateData(int a[], int n, int dataType)
 }
 
 
-long long count_comparison = 0;
+unsigned long long count_comparison = 0;
 chrono::duration<double> elapsed;
 
 
