@@ -309,19 +309,22 @@ void ShakerSort(int a[], int n) {
 
 void QuickSort(int a[], int low, int high) {
 	if (++count_comparison && low < high) {
+		int mid = low + (high - low) / 2;
+		swap(a[mid], a[high]);
 		int pivot = a[high];
+
 		int i = low - 1;
 
-		count_comparison++;
 		for (int j = low; j < high; j++) {
 			count_comparison++;
-			if (++count_comparison && a[j] < pivot) {
+			if (a[j] < pivot) {
 				i++;
-				swap(a[i], a[j]);
+				std::swap(a[i], a[j]);
 			}
 		}
-		swap(a[i + 1], a[high]);
+		std::swap(a[i + 1], a[high]);
 		int pi = i + 1;
+
 		QuickSort(a, low, pi - 1);
 		QuickSort(a, pi + 1, high);
 	}
