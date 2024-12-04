@@ -241,7 +241,7 @@ void ShellSort(int a[], int n) {
 }
 
 
-int BinarySearchForPosition(int a[], int n, int x, int& count_comparison) {
+int BinarySearchForPosition(int a[], int n, int x) {
 	int from = 0, to = n - 1;
 	int mid = 0;
 	while (++count_comparison && from <= to) {
@@ -259,7 +259,7 @@ void BinaryInsertionSort(int a[], int n) {
 	count_comparison = 0;
 
 	for (int i = 1; ++count_comparison && i < n; i++) {
-		int x = a[i], k = BinarySearchForPosition(a, i, x, count_comparison);
+		int x = a[i], k = BinarySearchForPosition(a, i, x);
 		for (int j = i; ++count_comparison && j > k; j--)
 			a[j] = a[j - 1];
 		a[k] = x;
