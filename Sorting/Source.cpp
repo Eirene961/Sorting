@@ -474,6 +474,7 @@ bool isanumber(string s) {
 
 void ExecuteSortAlgorithm(int a[], int n, string algorithm_name) {
 	auto start = chrono::high_resolution_clock::now();
+	count_comparison = 0;
 
 	if (algorithm_name == "selection-sort") {
 		SelectionSort(a, n);
@@ -537,6 +538,26 @@ void HandleInputOrder(int a[], int n, string input_order) {
 	}
 }
 
+string InputOrder(string input_order) {
+	string answer = "";
+	if (input_order == "-rand") {
+		answer = "Randomize";
+	}
+	else if (input_order == "-nsorted") {
+		answer = "Nearly Sorted";
+	}
+	else if (input_order == "-sorted") {
+		answer = "Sorted";
+	}
+	else if (input_order == "-rev") {
+		answer = "Reversed";
+	}
+	else {
+		answer = "Input order is invalid";
+	}
+	return answer;
+}
+
 void HandleOutputParameter(string output_parameter) {
 	if (output_parameter == "-time") {
 		cout << "Running time: " << elapsed.count() << endl;
@@ -587,7 +608,6 @@ int main(int argc, char* argv[])
 		{
 			if (!isanumber(argv[3])) // Command 1: [Execution file] -a [Algorithm] [Input filename] [Output parameter(s)]
 			{
-				cout << "Command 1" << endl;
 				string algorithm_name = argv[2];
 				string input_file = argv[3];
 				string output_parameter = argv[4];
@@ -616,7 +636,6 @@ int main(int argc, char* argv[])
 			}
 			else // Command 3: [Execution file] -a [Algorithm] [Input size] [Output parameter(s)]
 			{
-				cout << "Command 3" << endl;
 				string algorithm_name = argv[2];
 				string input_size = argv[3];
 				string output_parameter = argv[4];
@@ -661,14 +680,13 @@ int main(int argc, char* argv[])
 		}
 		else if (argc == 6) // Command 2: [Execution file] -a [Algorithm] [Input size] [Input order] [Output parameter(s)]
 		{
-			cout << "Command 2" << endl;
 			string algorithm_name = argv[2];
 			string input_size = argv[3];
 			string input_order = argv[4];
 			string output_parameter = argv[5];
 			cout << "Algorithm: " << algorithm_name << endl;
 			cout << "Input size: " << input_size << endl;
-			cout << "Input order: " << argv[4] << endl;
+			cout << "Input order: " << InputOrder(input_order) << endl;
 			cout << "-------------------------\n";
 
 			n = stoi(input_size);
@@ -688,7 +706,6 @@ int main(int argc, char* argv[])
 		cout << "COMPARE MODE" << endl;
 		if (argc == 5) // Command 4: [Execution file] -c [Algorithm 1] [Algorithm 2] [Input filename]
 		{
-			cout << "Command 4" << endl;
 			string algorithm_name_1 = argv[2];
 			string algorithm_name_2 = argv[3];
 			string input_file = argv[4];
@@ -724,14 +741,13 @@ int main(int argc, char* argv[])
 		}
 		else if (argc == 6) // Command 5: [Execution file] -c [Algorithm 1] [Algorithm 2] [Input size] [Input order]
 		{
-			cout << "Command 5" << endl;
 			string algorithm_name_1 = argv[2];
 			string algorithm_name_2 = argv[3];
 			string input_size = argv[4];
 			string input_order = argv[5];
 			cout << "Algorithm: " << algorithm_name_1 << " | " << algorithm_name_2 << endl;
 			cout << "Input file: " << input_size << endl;
-			cout << "Input order: " << argv[5] << endl;
+			cout << "Input order: " << InputOrder(input_order) << endl;
 			cout << "-------------------------\n";
 
 			n = stoi(input_size);
