@@ -181,6 +181,8 @@ void Merge(int a[], int left, int mid, int right)
 		j++;
 		k++;
 	}
+	delete[] L;
+	delete[] R;
 }
 
 void MergeSort(int a[], int left, int right)
@@ -454,10 +456,18 @@ void FlashSort(int a[], int n) {
 
 	// Step 6: Sort within each class
 	int start = 0;
-	for (int i = 0; i < m; i++) {
-		int end = class_counts[i];
+	for (int idx = 0; idx < m; idx++) {
+		int end = class_counts[idx];
 		if (++count_comparison && end - start > 1) {
-			sort(a + start, a + end);
+			for (int i = start; ++count_comparison && i < end; i++) {
+				int key = a[i];
+				int j = i - 1;
+				while (++count_comparison && j >= start && ++count_comparison && a[j] > key) {
+					a[j + 1] = a[j];
+					j--;
+				}
+				a[j + 1] = key;
+			}
 		}
 		start = end;
 	}
