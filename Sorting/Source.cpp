@@ -217,17 +217,17 @@ void InsertionSort(int a[], int n) {
 
 void ShellSort(int a[], int n) {
 	count_comparison = 0;
-	vector<int> jumbs;
+	vector<int> jumps;
 	int h = 1, i = 0;
 	while (h <= n - 1) {
-		jumbs.push_back(h);
+		jumps.push_back(h);
 		h = 3 * i + 1;
 		i++;
 	}
-	int m = jumbs.size();
+	int m = jumps.size();
 
 	for (i = m - 1; ++count_comparison && i >= 0; i--) {
-		int jumb = jumbs[i];
+		int jumb = jumps[i];
 		for (int j = jumb; ++count_comparison && j < n; j += jumb) {
 			int x = a[j];
 			int t = j;
@@ -570,13 +570,13 @@ string InputOrder(string input_order) {
 
 void HandleOutputParameter(string output_parameter) {
 	if (output_parameter == "-time") {
-		cout << "Running time: " << elapsed.count() << endl;
+		cout << "Running time: " << elapsed.count() * 1000 << endl;
 	}
 	else if (output_parameter == "-comp") {
 		cout << "Comparisons: " << count_comparison << endl;
 	}
 	else if (output_parameter == "-both") {
-		cout << "Running time: " << elapsed.count() << endl;
+		cout << "Running time: " << elapsed.count() * 1000 << endl;
 		cout << "Comparisons: " << count_comparison << endl;
 	}
 	else {
@@ -740,10 +740,10 @@ int main(int argc, char* argv[])
 			fin.close();
 
 			ExecuteSortAlgorithm(a, n, algorithm_name_1);
-			double running_time_1 = elapsed.count();
+			double running_time_1 = elapsed.count() * 1000;
 			int comparison_1 = count_comparison;
 			ExecuteSortAlgorithm(b, n, algorithm_name_2);
-			double running_time_2 = elapsed.count();
+			double running_time_2 = elapsed.count() * 1000;
 			int comparison_2 = count_comparison;
 
 			cout << "Running time: " << running_time_1 << " | " << running_time_2 << endl;
@@ -768,10 +768,10 @@ int main(int argc, char* argv[])
 			WriteFile(a, n, input_file);
 
 			ExecuteSortAlgorithm(a, n, algorithm_name_1);
-			double running_time_1 = elapsed.count();
+			double running_time_1 = elapsed.count() * 1000;
 			int comparison_1 = count_comparison;
 			ExecuteSortAlgorithm(b, n, algorithm_name_2);
-			double running_time_2 = elapsed.count();
+			double running_time_2 = elapsed.count() * 1000;
 			int comparison_2 = count_comparison;
 
 			cout << "Running time: " << running_time_1 << " | " << running_time_2 << endl;
