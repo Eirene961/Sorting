@@ -349,25 +349,25 @@ void CountingSort(int a[], int n) {
 	vector<int> count(range_of_elements, 0);
 
 	// Step 3: Count occurrences of each element
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; ++count_comparison && i < n; i++) {
 		count[a[i] - min_val]++;
 	}
 
 	// Step 4: Update count array with cumulative counts
-	for (int i = 1; i < range_of_elements; i++) {
+	for (int i = 1; ++count_comparison && i < range_of_elements; i++) {
 		count[i] += count[i - 1];
 	}
 
 	// Step 5: Build the output array
 	int i = n - 1;
-	while (i >= 0) {
+	while (++count_comparison && i >= 0) {
 		count[a[i] - min_val]--;
 		output[count[a[i] - min_val]] = a[i];
 		i--;
 	}
 
 	// Step 6: Copy the sorted output array back to the original array
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; ++count_comparison && i < n; i++) {
 		a[i] = output[i];
 	}
 }
@@ -378,19 +378,19 @@ void CountingSortForRadix(int a[], int n, int exp) {
 	memset(count, 0, sizeof(count));
 
 	// Count occurrences of each digit in the current place
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; ++count_comparison && i < n; i++) {
 		int index = (a[i] / exp) % 10;
 		count[index]++;
 	}
 
 	// Update count[i] to hold the position of the next digit in output
-	for (int i = 1; i < 10; i++) {
+	for (int i = 1; ++count_comparison && i < 10; i++) {
 		count[i] += count[i - 1];
 	}
 
 	// Build the output array
 	int i = n - 1;
-	while (i >= 0) {
+	while (++count_comparison && i >= 0) {
 		int index = (a[i] / exp) % 10;
 		count[index]--;
 		output[count[index]] = a[i];
@@ -398,7 +398,7 @@ void CountingSortForRadix(int a[], int n, int exp) {
 	}
 
 	// Copy the output array to the original array
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; ++count_comparison && i < n; i++) {
 		a[i] = output[i];
 	}
 }
@@ -411,7 +411,7 @@ void RadixSort(int a[], int n) {
 	int exp = 1; // Start with the least significant digit
 
 	// Perform counting sort for each digit
-	while (max_num / exp > 0) {
+	while (++count_comparison && max_num / exp > 0) {
 		CountingSortForRadix(a, n, exp);
 		exp *= 10;
 	}
@@ -435,13 +435,13 @@ void FlashSort(int a[], int n) {
 	double scaling_factor = double(m - 1) / (max_val - min_val);
 
 	// Step 3: Classify elements
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; ++count_comparison && i < n; i++) {
 		int class_index = int(scaling_factor * (a[i] - min_val));
 		class_counts[class_index]++;
 	}
 
 	// Step 4: Compute cumulative counts (class boundaries)
-	for (int i = 1; i < m; i++) {
+	for (int i = 1; ++count_comparison && i < m; i++) {
 		class_counts[i] += class_counts[i - 1];
 	}
 
@@ -462,7 +462,7 @@ void FlashSort(int a[], int n) {
 
 	// Step 6: Sort within each class
 	int start = 0;
-	for (int idx = 0; idx < m; idx++) {
+	for (int idx = 0; ++count_comparison && idx < m; idx++) {
 		int end = class_counts[idx];
 		if (++count_comparison && end - start > 1) {
 			for (int i = start; ++count_comparison && i < end; i++) {
