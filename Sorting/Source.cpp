@@ -217,23 +217,26 @@ void InsertionSort(int a[], int n) {
 
 void ShellSort(int a[], int n) {
 	count_comparison = 0;
+
 	vector<int> jumps;
-	int h = 1, i = 0;
-	while (h <= n - 1) {
-		jumps.push_back(h);
+	int h = 0, i = 0;
+	while (1) {
 		h = 3 * i + 1;
+		if (h >= n)
+			break;
+		jumps.push_back(h);
 		i++;
 	}
 	int m = jumps.size();
 
 	for (i = m - 1; ++count_comparison && i >= 0; i--) {
-		int jumb = jumps[i];
-		for (int j = jumb; ++count_comparison && j < n; j += jumb) {
+		int jump = jumps[i];
+		for (int j = jump; ++count_comparison && j < n; j += jump) {
 			int x = a[j];
 			int t = j;
-			while (++count_comparison && t >= jumb && ++count_comparison && a[t - jumb] > x) {
-				a[t] = a[t - jumb];
-				t -= jumb;
+			while (++count_comparison && t >= jump && ++count_comparison && a[t - jump] > x) {
+				a[t] = a[t - jump];
+				t -= jump;
 			}
 			a[t] = x;
 		}
